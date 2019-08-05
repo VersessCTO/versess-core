@@ -1,0 +1,8 @@
+/usr/bin/versess-cli		--	gen_context(system_u:object_r:versess_exec_t,s0)
+/usr/sbin/versessd		--	gen_context(system_u:object_r:versess_exec_t,s0)
+/usr/lib(64)?/versess/versessd		--	gen_context(system_u:object_r:versess_exec_t,s0)
+
+/etc/versess(/.*)?		gen_context(system_u:object_r:versess_conf_t,s0)
+/var/lib/versess(/.*)?		gen_context(system_u:object_r:versess_var_lib_t,s0)
+
+(/var)?/run/versessd(/.*)?   gen_context(system_u:object_r:versess_var_run_t,s0)

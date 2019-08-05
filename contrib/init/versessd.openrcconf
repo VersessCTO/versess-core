@@ -1,0 +1,33 @@
+# /etc/conf.d/versessd: config file for /etc/init.d/versessd
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/versess/versess.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/versessd"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/versessd.pid"
+
+# Where to write versessd data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/versessd"
+
+# User and group to own versessd process
+#BITCOIND_USER="versess"
+#BITCOIND_GROUP="versess"
+
+# Path to versessd executable
+#BITCOIND_BIN="/usr/bin/versessd"
+
+# Nice value to run versessd under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#BITCOIND_OPTS=""
+
+# The timeout in seconds OpenRC will wait for bitcoind to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+BITCOIND_SIGTERM_TIMEOUT=60

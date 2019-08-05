@@ -1,0 +1,6 @@
+usr/local/bin/versess-qt usr/bin
+share/pixmaps/versess32.xpm usr/share/pixmaps
+share/pixmaps/versess16.xpm usr/share/pixmaps
+share/pixmaps/versess128.png usr/share/pixmaps
+debian/versess-qt.desktop usr/share/applications
+debian/versess-qt.protocol usr/share/kde4/services/

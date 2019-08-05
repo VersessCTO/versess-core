@@ -1,0 +1,3 @@
+usr/local/bin/versessd usr/bin
+usr/local/bin/versess-cli usr/bin
+debian/examples/versess.conf etc/versess

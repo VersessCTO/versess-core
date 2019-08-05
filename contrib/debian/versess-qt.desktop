@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Versess Coin
+Comment=Versess P2P Cryptocurrency
+Comment[fr]=Versess, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Versess, eşten eşe kriptografik sanal para birimi
+Exec=versess-qt %u
+Terminal=false
+Type=Application
+Icon=versess128
+MimeType=x-scheme-handler/versess;
+Categories=Office;Finance;
+StartupWMClass=Versess-qt

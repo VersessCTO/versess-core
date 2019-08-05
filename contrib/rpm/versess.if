@@ -1,0 +1,157 @@
+
+## <summary>policy for versess</summary>
+
+
+########################################
+## <summary>
+##	Transition to versess.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`versess_domtrans',`
+	gen_require(`
+		type versess_t, versess_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, versess_exec_t, versess_t)
+')
+
+
+########################################
+## <summary>
+##	Execute versess server in the versess domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`versess_initrc_domtrans',`
+	gen_require(`
+		type versess_initrc_exec_t;
+	')
+
+	init_labeled_script_domtrans($1, versess_initrc_exec_t)
+')
+
+
+########################################
+## <summary>
+##	Search versess lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`versess_search_lib',`
+	gen_require(`
+		type versess_var_lib_t;
+	')
+
+	allow $1 versess_var_lib_t:dir search_dir_perms;
+	files_search_var_lib($1)
+')
+
+########################################
+## <summary>
+##	Read versess lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`versess_read_lib_files',`
+	gen_require(`
+		type versess_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	read_files_pattern($1, versess_var_lib_t, versess_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage versess lib files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`versess_manage_lib_files',`
+	gen_require(`
+		type versess_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_files_pattern($1, versess_var_lib_t, versess_var_lib_t)
+')
+
+########################################
+## <summary>
+##	Manage versess lib directories.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`versess_manage_lib_dirs',`
+	gen_require(`
+		type versess_var_lib_t;
+	')
+
+	files_search_var_lib($1)
+	manage_dirs_pattern($1, versess_var_lib_t, versess_var_lib_t)
+')
+
+
+########################################
+## <summary>
+##	All of the rules required to administrate
+##	a versess environment
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+## <param name="role">
+##	<summary>
+##	Role allowed access.
+##	</summary>
+## </param>
+## <rolecap/>
+#
+interface(`versess_admin',`
+	gen_require(`
+		type versess_t;
+		type versess_initrc_exec_t;
+		type versess_var_lib_t;
+	')
+
+	allow $1 versess_t:process { ptrace signal_perms };
+	ps_process_pattern($1, versess_t)
+
+	versess_initrc_domtrans($1)
+	domain_system_change_exemption($1)
+	role_transition $2 versess_initrc_exec_t system_r;
+	allow $2 system_r;
+
+	files_search_var_lib($1)
+	admin_pattern($1, versess_var_lib_t)
+
+')
+
